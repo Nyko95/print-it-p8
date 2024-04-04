@@ -1,3 +1,12 @@
+//Déclaration des variables globales
+
+const left = document.querySelector(".arrow_left");
+const right = document.querySelector(".arrow_right");
+const dots = document.querySelectorAll(".dot");
+const bannerSlides = document.querySelector(".banner-img");
+const bannerText = document.querySelector("p");
+
+
 const slides = [
 	{
 		"image":"slide1.jpg",
@@ -17,19 +26,41 @@ const slides = [
 	}
 ]
 
+// Ajout des écouteurs d'événements
+left.addEventListener("click", showPreviousSlide);
+right.addEventListener("click", showNextSlide);
 
-const left = document.querySelector(".arrow_left");
-console.log(left);
-const right = document.querySelector(".arrow_right");
-console.log(right);
+let currentSlide = 0;
+updateActiveDot();
 
-left.addEventListener("click", showLeftSlide);
-right.addEventListener("click", showRightSlide);
-
-function showLeftSlide() {
-    console.log("Tu as cliqué sur la flèche gauche");
+function updateActiveDot () {
+    dots.forEach ((dot, index) => {
+        dot.classList.remove("dot_selected");
+        if (index === currentSlide) {
+            dot.classList.add ("dot_selected");
+        }
+    })
 }
 
-function showRightSlide() {
-    console.log("Tu as cliqué sur la flèche droite");
+
+
+// Définition des fonctions
+
+
+function showNextSlide() {
+    console.log("Clic sur la flèche droite"); 
+    currentSlide = (currentSlide + 1) % slides.length;
+    bannerSlides.src = "./assets/images/slideshow/" + slides[currentSlide].image;
+	console.log
+    bannerText.innerHTML = slides[currentSlide].tagLine;
+    updateActiveDot();
 }
+
+function showPreviousSlide () {
+    console.log("Clic sur la flèche gauche"); 
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    bannerSlides.src = "./assets/images/slideshow/" + slides[currentSlide].image;
+	console.log
+    bannerText.innerHTML = slides[currentSlide].tagLine;
+    updateActiveDot();
+} 
