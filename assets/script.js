@@ -68,7 +68,7 @@ function showNextSlide() {
     bannerSlides.src = "./assets/images/slideshow/" + slides[currentSlide].image;
 	console.log
     bannerText.innerHTML = slides[currentSlide].tagLine;
-    
+    updateActiveDot();
 }
 
 function showPreviousSlide () {
